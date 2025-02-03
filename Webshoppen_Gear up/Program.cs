@@ -8,10 +8,30 @@ namespace Webshoppen_Gear_up
     {
         static void Main(string[] args)
         {
-            
-            while(true)
+            int currentcustomerID = 0;
+            int currentcartID = 0;
+            bool menu = true;
+
+            Console.WriteLine("Please choose and option\n-------------------------------------------------------\n 1)Log in as existing customer:\n2)Register as new customer:");
+            Int32.TryParse(Console.ReadLine(), out int customerProfile);
+            switch (customerProfile)
             {
-                Shopping_Cart cart = new Shopping_Cart();
+                case 1: 
+                    currentcustomerID = Customer.FindCustomer();
+                    currentcartID = Shopping_Cart.FindCart(currentcustomerID);
+                    break;
+                case 2: 
+                    Customer.NewCustomer();
+                    currentcustomerID = Customer.FindCustomer();
+                    currentcartID = Shopping_Cart.FindCart(currentcustomerID);
+                    break;
+            }
+            
+            
+
+            while (menu)
+            {
+                
                 Console.Clear();
                 Console.WriteLine("  ____  ____  ____  ____  ____    ____                 _   _         ____  ____  ____  ____  ____  \r\n /\\   \\/\\   \\/\\   \\/\\   \\/\\   \\  / ___| ___  __ _ _ __| | | |_ __   /\\   \\/\\   \\/\\   \\/\\   \\/\\   \\ \r\n/  \\___\\ \\___\\ \\___\\ \\___\\ \\___\\| |  _ / _ \\/ _` | '__| | | | '_ \\ /  \\___\\ \\___\\ \\___\\ \\___\\ \\___\\\r\n\\  /   / /   / /   / /   / /   /| |_| |  __/ (_| | |  | |_| | |_) |\\  /   / /   / /   / /   / /   /\r\n \\/___/\\/___/\\/___/\\/___/\\/___/  \\____|\\___|\\__,_|_|   \\___/| .__/  \\/___/\\/___/\\/___/\\/___/\\/___/ \r\n                                                            |_|                                    ");
                 Console.WriteLine();
@@ -41,7 +61,7 @@ namespace Webshoppen_Gear_up
                         {
                             case 1:
                                 
-                                Shopping_Cart.itemToCart(cart, productID);
+                                Shopping_Cart.itemToCart(currentcartID, productID);
                                 
                                 break;
                             
@@ -55,10 +75,8 @@ namespace Webshoppen_Gear_up
                         break;
                     
                     case 2:
-                        Console.WriteLine("Please enter your Customer ID number: ");
-                        Int32.TryParse(Console.ReadLine(), out int customerID);
-                        cart.CustomerID = customerID;
-                        Shopping_Cart.ShowCart(customerID);
+                        
+                        Shopping_Cart.ShowCart(currentcustomerID);
                         Console.ReadLine();     
                         break;
                    
@@ -95,6 +113,10 @@ namespace Webshoppen_Gear_up
 
 
                         break;
+                    case 5:
+                         menu = false;
+                        break;
+                        
 
 
                 }
