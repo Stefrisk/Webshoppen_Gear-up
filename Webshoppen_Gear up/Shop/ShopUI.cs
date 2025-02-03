@@ -38,7 +38,7 @@ namespace Webshoppen_Gear_up.Shop
             Window clearence = new Window("Deal 3", 66,9,Deal3);
             clearence.Draw();
 
-            List<string> startMenu = new List<string> { "1)Store ","2)My Cart","3)Search(notworkingyet)", "4)Admin" };
+            List<string> startMenu = new List<string> { "1)Store ","2)My Cart","3)Search(notworkingyet)", "4)Admin, 5) Return to start" };
             Window startpageMenu = new Window("Start",0,18,startMenu);
             startpageMenu.Draw();
 
