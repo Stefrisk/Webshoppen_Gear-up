@@ -14,23 +14,43 @@ namespace Webshoppen_Gear_up.Shop
         public decimal? CartTotal { get; set; }
         public int CustomerID { get; set; }
 
-        
+        public Shopping_Cart(int customerID)
+        {
+            CustomerID = customerID;
+        }
         public virtual List<ShoppingCartItem> shoppingCartItems { get; set; } = new List<ShoppingCartItem>();
 
+        public static int FindCart(int customerID)
+        {
+            var db = new GearUpContext();
+            var curShoppingCart = db.ShoppingCart.SingleOrDefault(x => x.CustomerID == customerID);
+            if (curShoppingCart != null)
+            {
+                return curShoppingCart.Shopping_CartID;
+            }
+            else 
+            { 
+                var cart = new Shopping_Cart(customerID);
+                db.ShoppingCart.Add(cart);
+                db.SaveChanges();
+                return cart.Shopping_CartID;
+            }
 
-        public static void itemToCart(Shopping_Cart cart1, int productID)
+        }
+        public static void itemToCart(int cartID, int productID)
         {
             var db = new GearUpContext(); // connect to database
             var shopItems = db.Items;
             var carts = db.ShoppingCart;
-            carts.Add(cart1);
-            db.SaveChanges();
+            
             
 
-            var mycart = carts.Include(cart => cart.shoppingCartItems) // include makes sure related items are loaded 
-                .FirstOrDefault(cart => cart.Shopping_CartID == cart1.Shopping_CartID);
+            var mycart = carts.Include(cart => cart.shoppingCartItems) // finds cart iwth matching ID,  include makes sure related items are loaded 
+                .FirstOrDefault(cart => cart.Shopping_CartID == cartID);
 
-            var itemResult = shopItems.FirstOrDefault(product => product.ItemID == productID);
+            var itemResult = shopItems.FirstOrDefault(product => product.ItemID == productID); // find item
+
+
             if (itemResult == null)
             {
                 Console.WriteLine("Item not found.");
@@ -40,7 +60,7 @@ namespace Webshoppen_Gear_up.Shop
             {
                 var cartItem = new ShoppingCartItem
                 {
-                    Shopping_CartID = cart1.Shopping_CartID,
+                    Shopping_CartID = cartID,     // create new shopping cart item
                     ItemId = itemResult.ItemID
                 };
                 
