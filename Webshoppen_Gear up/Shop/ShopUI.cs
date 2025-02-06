@@ -26,19 +26,19 @@ namespace Webshoppen_Gear_up.Shop
 
 
 
-            List<string> Deal1 = new List<string> { discountItems[0].Name, discountItems[0].Size, discountItems[0].Color, discountItems[0].Price.ToString(),"Press B"};
+            List<string> Deal1 = new List<string> { discountItems[0].Name, discountItems[0].Size, discountItems[0].Color, discountItems[0].Price.ToString(),"Press 6"};
             Window Fjallraven = new Window("Deal 1", 0, 9, Deal1);
             Fjallraven.Draw();
 
-            List<string> Deal2 = new List<string> { discountItems[1].Name, discountItems[1].Size, discountItems[1].Color, discountItems[1].Price.ToString(),"Press N" };
+            List<string> Deal2 = new List<string> { discountItems[1].Name, discountItems[1].Size, discountItems[1].Color, discountItems[1].Price.ToString(),"Press 7" };
             Window springSale = new Window("Deal 2!", 33, 9, Deal2);
             springSale.Draw();
 
-            List<string> Deal3 = new List<string> { discountItems[2].Name, discountItems[2].Size, discountItems[2].Color, discountItems[2].Price.ToString(), "Press M"};
+            List<string> Deal3 = new List<string> { discountItems[2].Name, discountItems[2].Size, discountItems[2].Color, discountItems[2].Price.ToString(), "Press 8"};
             Window clearence = new Window("Deal 3", 66,9,Deal3);
             clearence.Draw();
 
-            List<string> startMenu = new List<string> { "1)Store ","2)My Cart","3)Search(notworkingyet)", "4)Admin, 5) Return to start" };
+            List<string> startMenu = new List<string> { "1)Store ","2)My Cart","3)Search", "4)Admin", "5)Exit" };
             Window startpageMenu = new Window("Start",0,18,startMenu);
             startpageMenu.Draw();
 

@@ -78,7 +78,7 @@ namespace Webshoppen_Gear_up.Shop
              var db = new GearUpContext();
             var shoppingCarts = db.ShoppingCart;
             var customers = db.Customers;
-
+            
 
             var cartResult = shoppingCarts
                 .Include(c => c.shoppingCartItems)   
@@ -92,13 +92,13 @@ namespace Webshoppen_Gear_up.Shop
                 return;
             }
 
-            Console.WriteLine("Your shopping cart: ");
+            Console.WriteLine($"---------------------------------------------------\nYour shopping cart | Cart total: {cartResult.CartTotal} kr");
             if (cartResult.shoppingCartItems.Any())
             {
                 foreach(var cartItem in cartResult.shoppingCartItems)
                 {
                     var item2 = cartItem.Item;
-                    Console.WriteLine($"Name:{item2.Name} {item2.MiscInfo}  Color:{item2.Color} Size: {item2.Size} ");
+                    Console.WriteLine($"\nName:{item2.Name} {item2.MiscInfo}  Color:{item2.Color} Size: {item2.Size} Price: {item2.Price}");
                 }
             }
             else
@@ -107,6 +107,38 @@ namespace Webshoppen_Gear_up.Shop
             }
 
         }
+        public void Checkout(Shopping_Cart cart)
+        {
 
+        } // not done 
+        public static void UpdateCartTotal(int cartID)
+        {
+            int cartTotal = 0; // each item price in cart is added to this variable...
+            var db = new GearUpContext();
+            var myCart = db.ShoppingCart;
+
+            var currentCart = myCart.Include(c=>c.shoppingCartItems)
+                .ThenInclude(cartItem=> cartItem.Item)
+                .SingleOrDefault(x=>x.Shopping_CartID == cartID);
+           
+            if (currentCart.shoppingCartItems.Any()) 
+            {
+                foreach(var cartItem in currentCart.shoppingCartItems)
+                {
+                    var item1 = cartItem.Item;
+                    cartTotal += Convert.ToInt32(item1.Price);
+                } 
+                currentCart.CartTotal = cartTotal;
+                db.SaveChanges();
+            }
+            else 
+            {
+                Console.WriteLine("Shopping cart has no items in it.");         
+            }
+
+
+
+
+        }
     }
 }

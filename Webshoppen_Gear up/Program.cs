@@ -75,26 +75,27 @@ namespace Webshoppen_Gear_up
                         break;
                     
                     case 2:
-                        
+                        Shopping_Cart.UpdateCartTotal(currentcartID);
                         Shopping_Cart.ShowCart(currentcustomerID);
                         Console.ReadLine();     
                         break;
                    
-                    case 3: // free search 
+                    case 3: Admin.SearchProduct();
+                        Console.ReadLine();// free search 
                         break;
 
                     case 4: //Admin 
-                        Console.WriteLine("1)Edit product \n2) Edit category \n3)Edit customer");
+                        Console.WriteLine("1)Edit product \n2)Edit category \n3)Edit customer");
                         Int32.TryParse(Console.ReadLine(), out int adminchoice);
                         switch (adminchoice)
                         {
                             case 1 : // edit product 
-                                Console.WriteLine("1) Add \n2) Delete\n3) Change");
+                                Console.WriteLine("1)Add\n2)Delete\n3)Change");
                                 Int32.TryParse(Console.ReadLine(), out int adminproduct);
                                 switch (adminproduct)
                                 {
                                     case 1 :
-                                        Admin.AddProducts();
+                                            Admin.AddProducts();
                                         break;
                                     case 2 : Admin.DeleteProducts();
                                         break;
@@ -120,7 +121,7 @@ namespace Webshoppen_Gear_up
 
 
                 }
-                Console.ReadLine();
+                
             }
 
 

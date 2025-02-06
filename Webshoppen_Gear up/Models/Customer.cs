@@ -21,7 +21,7 @@ namespace Webshoppen_Gear_up.Models
         public int? OrderID { get; set; }
         public int? ShoppingCartID { get; set; }
 
-
+        public Customer() { }
 
         public Customer(string name, int age, string country, string city, int postalcode, string streetaddress, string email, int phone)
         {

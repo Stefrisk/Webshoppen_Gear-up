@@ -103,6 +103,21 @@ namespace Webshoppen_Gear_up
                     break;
             }
         }
-        
+        public static void SearchProduct()
+        {
+            Console.WriteLine("Enter the name of the product:  ");
+            string name = Console.ReadLine();
+            var db = new GearUpContext();
+            var items = db.Items;
+            var shopItem = items.FirstOrDefault(item => item.Name == name);
+            if (shopItem != null)
+            {
+                Console.WriteLine($"_________________________________________\nFound matching product:\nName:{shopItem.Name}\nDescription:{shopItem.MiscInfo}\nSize:{shopItem.Size}\nColor:{shopItem.Color}\nPrice:{shopItem.Price}Amount in stock:{shopItem.AmountInStock}");
+            }
+            else
+            {
+                Console.WriteLine("No item matching your search was found. Try again!");
+            }
+        }
     }
 }

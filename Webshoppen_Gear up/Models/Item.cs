@@ -17,6 +17,7 @@ namespace Webshoppen_Gear_up.Models
         public string Gender { get; set; }
         public string? MiscInfo { get; set; }
         public int AmountInStock { get; set; }
+        public int? OrderQuantity {  get; set; }
         public bool Discount { get; set; }
         public int SuplierID { get; set; }
         public int CategoryID { get; set; }
