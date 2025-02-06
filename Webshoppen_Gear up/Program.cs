@@ -85,7 +85,7 @@ namespace Webshoppen_Gear_up
                         break;
 
                     case 4: //Admin 
-                        Console.WriteLine("1)Edit product \n2)Edit category \n3)Edit customer");
+                        Console.WriteLine("1)Edit product \n2)Edit category \n3)View all previous orders");
                         Int32.TryParse(Console.ReadLine(), out int adminchoice);
                         switch (adminchoice)
                         {
@@ -103,11 +103,11 @@ namespace Webshoppen_Gear_up
                                         break;
                                 }
                                 break;
-                            case 2 :// edit category
-                                Admin.EditCats();
+                            case 2 :
+                              Admin.EditCats();
                                 break;
-                            case 3 :// edit Customer
-
+                            case 3 :
+                                Order.AllOrders();
                                 break;
 
                         }
