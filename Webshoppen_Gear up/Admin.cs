@@ -124,13 +124,13 @@ namespace Webshoppen_Gear_up
         {
             var db = new GearUpContext();
             var categories = db.Categories;
-            var myCats = categories.Where(i => (bool)!i.IsDeleted);
+            var myCats = categories.Where(i => i.IsDeleted == false);
 
             foreach (var cat in myCats)
             {
                 Console.WriteLine($"Category Id: {cat.CategoryID} Name: {cat.Name} \n");
             }
-            Console.WriteLine($"------ Edit Categories ------\n1) Change name\n 2) Add category\n3) Remove category");
+            Console.WriteLine($"------ Edit Categories ------\n1) Change name\n 2) Add category\n3) Remove category\n 4) Previous Orders");
             Int32.TryParse( Console.ReadLine(), out int choice);
             if (choice > 0 && choice < 4)
             {
@@ -144,6 +144,9 @@ namespace Webshoppen_Gear_up
                         break;
                     case 3:
                         Category.RemoveCat();
+                        break;
+                    case 4:
+
                         break;
                 }
             }
