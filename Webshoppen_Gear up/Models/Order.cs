@@ -27,6 +27,10 @@ namespace Webshoppen_Gear_up.Models
         public virtual Customer? Customer { get; set; }
         public virtual DeliveryService? DeliveryService { get; set; }
         
-
+        public static void AllOrders()
+        {
+            var db = new GearUpContext();
+            var orderList = db.PreviousOrders
+        }
     }
 }
