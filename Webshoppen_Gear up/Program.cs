@@ -104,7 +104,7 @@ namespace Webshoppen_Gear_up
                                 }
                                 break;
                             case 2 :// edit category
-
+                                Admin.EditCats();
                                 break;
                             case 3 :// edit Customer
 
