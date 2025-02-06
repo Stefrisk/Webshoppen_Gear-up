@@ -139,6 +139,9 @@ namespace Webshoppen_Gear_up.Migrations
                     b.Property<int?>("OrderID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("OrderQuantity")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -259,7 +262,7 @@ namespace Webshoppen_Gear_up.Migrations
                     b.Property<decimal?>("CartTotal")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("CustomerID")
+                    b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
                     b.Property<int?>("ItemID")
@@ -268,8 +271,7 @@ namespace Webshoppen_Gear_up.Migrations
                     b.HasKey("Shopping_CartID");
 
                     b.HasIndex("CustomerID")
-                        .IsUnique()
-                        .HasFilter("[CustomerID] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("ItemID");
 
@@ -337,7 +339,9 @@ namespace Webshoppen_Gear_up.Migrations
                 {
                     b.HasOne("Webshoppen_Gear_up.Models.Customer", null)
                         .WithOne("Shopping_Cart")
-                        .HasForeignKey("Webshoppen_Gear_up.Shop.Shopping_Cart", "CustomerID");
+                        .HasForeignKey("Webshoppen_Gear_up.Shop.Shopping_Cart", "CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Webshoppen_Gear_up.Models.Item", null)
                         .WithMany("Shopping_Carts")
