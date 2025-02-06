@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Webshoppen_Gear_up.Models;
 
@@ -11,9 +12,11 @@ using Webshoppen_Gear_up.Models;
 namespace Webshoppen_Gear_up.Migrations
 {
     [DbContext(typeof(GearUpContext))]
-    partial class GearUpContextModelSnapshot : ModelSnapshot
+    [Migration("20250206165026_GearUp4")]
+    partial class GearUp4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +32,6 @@ namespace Webshoppen_Gear_up.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryID"));
-
-                    b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -195,11 +195,11 @@ namespace Webshoppen_Gear_up.Migrations
                     b.Property<int?>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ItemQuantity")
+                    b.Property<int>("ItemQuantity")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("OrderTotal")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("OrderTotal")
+                        .HasColumnType("real");
 
                     b.Property<string>("PaymentType")
                         .IsRequired()
@@ -212,33 +212,6 @@ namespace Webshoppen_Gear_up.Migrations
                     b.HasIndex("DeliveryServiceID");
 
                     b.ToTable("PreviousOrders");
-                });
-
-            modelBuilder.Entity("Webshoppen_Gear_up.Models.OrderItem", b =>
-                {
-                    b.Property<int>("OrderItemID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemID"));
-
-                    b.Property<int>("ItemID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderID")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderItemID");
-
-                    b.HasIndex("OrderID");
-
-                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("Webshoppen_Gear_up.Models.ShoppingCartItem", b =>
@@ -349,15 +322,6 @@ namespace Webshoppen_Gear_up.Migrations
                     b.Navigation("DeliveryService");
                 });
 
-            modelBuilder.Entity("Webshoppen_Gear_up.Models.OrderItem", b =>
-                {
-                    b.HasOne("Webshoppen_Gear_up.Models.Order", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Webshoppen_Gear_up.Models.ShoppingCartItem", b =>
                 {
                     b.HasOne("Webshoppen_Gear_up.Models.Item", "Item")
@@ -405,8 +369,6 @@ namespace Webshoppen_Gear_up.Migrations
             modelBuilder.Entity("Webshoppen_Gear_up.Models.Order", b =>
                 {
                     b.Navigation("Items");
-
-                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("Webshoppen_Gear_up.Shop.Shopping_Cart", b =>
