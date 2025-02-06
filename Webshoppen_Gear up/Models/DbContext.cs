@@ -18,6 +18,8 @@ namespace Webshoppen_Gear_up.Models
         public DbSet<DeliveryService> DeliveryServices { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Shopping_Cart> ShoppingCart { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItem { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
