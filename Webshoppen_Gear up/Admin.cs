@@ -36,14 +36,14 @@ namespace Webshoppen_Gear_up
             Int32.TryParse(Console.ReadLine(), out int supplier);
             Console.WriteLine("Choose a product category: write 1 2 or 3");
             Int32.TryParse(Console.ReadLine(), out int category);
-            try 
+            try
             {
                 Item item = new Item(pName, pSize, pColor, pGender, pDesc, supplier, category, price, quantity, discount);
                 db2.Items.Add(item);
                 db2.SaveChanges();
             }
             catch { Console.WriteLine("something went wrong please try again."); }
-            
+
 
         }
         public static void DeleteProducts()
@@ -83,23 +83,24 @@ namespace Webshoppen_Gear_up
             Int32.TryParse(Console.ReadLine(), out int productID);
             var shopItem = shopItems.FirstOrDefault(product => product.ItemID == productID);
             Console.WriteLine($"What would you like to change?: \n 1) Product name \n 2) Discount");
-            Int32.TryParse(Console.ReadLine() , out int menuchoice);
-            switch (menuchoice) 
+            Int32.TryParse(Console.ReadLine(), out int menuchoice);
+            switch (menuchoice)
             {
-                case 1: Console.WriteLine("Enter new product name: ");
+                case 1:
+                    Console.WriteLine("Enter new product name: ");
                     string name = Console.ReadLine();
-                    if ( name != null)
+                    if (name != null)
                     {
                         shopItem.Name = name;
                         db3.SaveChanges();
                     }
                     break;
 
-                case 2: 
+                case 2:
                     Console.WriteLine("Is product still discounted?: write true or false ");
                     bool.TryParse(Console.ReadLine(), out bool discount);
                     shopItem.Discount = discount;
-                    db3.SaveChanges() ;
+                    db3.SaveChanges();
                     break;
             }
         }
@@ -118,6 +119,37 @@ namespace Webshoppen_Gear_up
             {
                 Console.WriteLine("No item matching your search was found. Try again!");
             }
+        }
+        public static void EditCats()
+        {
+            var db = new GearUpContext();
+            var categories = db.Categories;
+            var myCats = categories.Where(i => (bool)!i.IsDeleted);
+
+            foreach (var cat in myCats)
+            {
+                Console.WriteLine($"Category Id: {cat.CategoryID} Name: {cat.Name} \n");
+            }
+            Console.WriteLine($"------ Edit Categories ------\n1) Change name\n 2) Add category\n3) Remove category");
+            Int32.TryParse( Console.ReadLine(), out int choice);
+            if (choice > 0 && choice < 4)
+            {
+                switch (choice)
+                {
+                    case 1:
+                        Category.ChangeCat();
+                        break;
+                    case 2:
+                        Category.AddCat();
+                        break;
+                    case 3:
+                        Category.RemoveCat();
+                        break;
+                }
+            }
+            else { Console.WriteLine("Invaild menu choice!"); }
+
+
         }
     }
 }

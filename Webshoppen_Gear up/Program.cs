@@ -75,7 +75,7 @@ namespace Webshoppen_Gear_up
                         break;
                     
                     case 2:
-                        Shopping_Cart.UpdateCartTotal(currentcartID);
+                        Shopping_Cart.UpdateTotal(currentcartID);
                         Shopping_Cart.ShowCart(currentcustomerID);
                         Console.ReadLine();     
                         break;

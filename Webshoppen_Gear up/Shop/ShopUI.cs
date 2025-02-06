@@ -26,15 +26,15 @@ namespace Webshoppen_Gear_up.Shop
 
 
 
-            List<string> Deal1 = new List<string> { discountItems[0].Name, discountItems[0].Size, discountItems[0].Color, discountItems[0].Price.ToString(),"Press 6"};
+            List<string> Deal1 = new List<string> { discountItems[0].Name, discountItems[0].Size, discountItems[0].Color, discountItems[0].Price.ToString()};
             Window Fjallraven = new Window("Deal 1", 0, 9, Deal1);
             Fjallraven.Draw();
 
-            List<string> Deal2 = new List<string> { discountItems[1].Name, discountItems[1].Size, discountItems[1].Color, discountItems[1].Price.ToString(),"Press 7" };
+            List<string> Deal2 = new List<string> { discountItems[1].Name, discountItems[1].Size, discountItems[1].Color, discountItems[1].Price.ToString() };
             Window springSale = new Window("Deal 2!", 33, 9, Deal2);
             springSale.Draw();
 
-            List<string> Deal3 = new List<string> { discountItems[2].Name, discountItems[2].Size, discountItems[2].Color, discountItems[2].Price.ToString(), "Press 8"};
+            List<string> Deal3 = new List<string> { discountItems[2].Name, discountItems[2].Size, discountItems[2].Color, discountItems[2].Price.ToString()};
             Window clearence = new Window("Deal 3", 66,9,Deal3);
             clearence.Draw();
 
